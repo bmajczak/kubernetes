@@ -20,21 +20,17 @@ spec:
         volumeMounts:
           - mountPath: /var/lib/mysql
             name: vpro-db-data
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 3306
           name: vprodb-port
         env:
           - name: MYSQL_ROOT_PASSWORD
-            key: db-pass
+            value: db-pass
       nodeSelector:
         zone: us-east-2a
       volumes:
         - name: vpro-db-data
-          awsElasticBlockstore:
+          awsElasticBlockStore:
             volumeID: vol-02e1f1660464d29f5
             fsType: ext4
       initContainers:
